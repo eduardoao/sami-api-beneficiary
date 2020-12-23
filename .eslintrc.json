@@ -1,0 +1,35 @@
+{
+  "extends": ["standard-with-typescript", "plugin:boundaries/recommended"],
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "boundaries/entry-point": "off",
+    "boundaries/allowed-types": [2, {
+        "allow": {
+          "entities": ["entities"],
+          "usecases": ["entities", "usecases"],
+          "adapters": ["entities", "usecases", "adapters"],
+          "external": ["entities", "usecases", "adapters", "external"],
+          "main": ["entities", "usecases", "adapters", "external", "main"],
+          "shared": ["shared"]
+        }
+      }
+    ]
+  },
+  "plugins": ["boundaries"],
+  "settings": {
+    "boundaries/types": ["entities", "usecases", "adapters", "external", "main", "shared"],
+    "boundaries/ignore": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+    "boundaries/alias": {
+      "entities": "src/entities",
+      "usecases": "src/usecases",
+      "adapters": "src/adapters",
+      "external": "src/external",
+      "main": "src/main",
+      "shared": "src/shared"
+    }
+  }
+}
