@@ -7,21 +7,19 @@ export class MongodbUserRepository implements BeneficiaryRepository {
   async update (beneficiary: BeneficiaryData): Promise<void> {
     const userCollection = MongoHelper.getCollection('beneficiary')
     const exists = await this.findUserByEmail(beneficiary.email)
-    if (!exists) {
-      await userCollection.updateOne(exists, beneficiary)
+    if (exists) {
+      await userCollection.updateOne({ email: exists.email }, { $set: beneficiary }, { upsert: true })
     }
   }
 
-  async delete (id: string) : Promise<void> {
+  async delete (email: string): Promise<void> {
     const userCollection = MongoHelper.getCollection('beneficiary')
-    const objectId = new ObjectId(id)
-    const beneficiary = userCollection.findOne({ _id: objectId });   
-    if (!beneficiary) {
-      await userCollection.deleteOne(beneficiary)
+    const exists = await this.findUserByEmail(email)
+    if (exists) {
+      await userCollection.deleteOne(exists)
     }
-  }  
+  }
 
-  
   async findAllUsers (): Promise<BeneficiaryData[]> {
     return await MongoHelper.getCollection('beneficiary').find().toArray()
   }
@@ -32,7 +30,14 @@ export class MongodbUserRepository implements BeneficiaryRepository {
     return result
   }
 
-  async add (user: BeneficiaryData): Promise<void> {
+  async findUserById (id: string): Promise<BeneficiaryData> {
+    const userCollection = MongoHelper.getCollection('beneficiary')
+    const objectId = new ObjectId(id)
+    const result = await userCollection.findOne({ _id: objectId })
+    return result
+  }
+
+ async add (user: BeneficiaryData): Promise<void> {
     const userCollection = MongoHelper.getCollection('beneficiary')
     const exists = await this.exists(user.email)
     if (!exists) {

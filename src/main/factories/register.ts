@@ -4,8 +4,8 @@ import { MongodbUserRepository } from '../../external/repositories/mongodb/mongo
 
 
 export const makeRegisterUserController = (): RegisterBeneficiaryController => {
-  const mongodbUserRepository = new MongodbUserRepository()  
-  const registerBeneficiaryOnSystem = new RegisterBeneficiaryOnSystem(mongodbUserRepository)  
+  const mongodbUserRepository = new MongodbUserRepository()
+  const registerBeneficiaryOnSystem = new RegisterBeneficiaryOnSystem(mongodbUserRepository)
   const registerUserController = new RegisterBeneficiaryController(registerBeneficiaryOnSystem)
   return registerUserController
 }

@@ -1,6 +1,5 @@
-import { ConsultBeneficiaryResponse } from './consult-beneficiary-response';
-
+import { ConsultBeneficiaryResponse } from './consult-beneficiary-response'
 
 export interface IConsultBeneficiary {
-  ConsultBeneficiaryOnSystem: () => Promise<ConsultBeneficiaryResponse[]>
+  ConsultBeneficiaryOnSystem: () => Promise<ConsultBeneficiaryResponse>
 }

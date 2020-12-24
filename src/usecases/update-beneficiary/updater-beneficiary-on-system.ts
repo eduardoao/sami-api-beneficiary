@@ -13,25 +13,16 @@ export class UpdateBeneficiaryOnSystem implements IUpdateBeneficiary {
   constructor (beneficiaryRepo: BeneficiaryRepository) {
     this.userRepository = beneficiaryRepo
   }
-  UpdateBeneficiaryOnSystem: (beneficiaryData: BeneficiaryData) => Promise<any>
+  
 
-  async RegisterBeneficiaryOnSystem (beneficiaryData: BeneficiaryData): Promise<UpdateBeneficiaryResponse> {
+  async UpdateBeneficiaryOnSystem (beneficiaryData: BeneficiaryData): Promise<UpdateBeneficiaryResponse> {
     const userOrError: Either<InvalidNameError | InvalidEmailError, Beneficiary> = Beneficiary.create(beneficiaryData)
     if (userOrError.isLeft()) {
       return left(userOrError.value)
     }
-    const beneficiary: Beneficiary = userOrError.value
-    const exists = this.userRepository.exists(beneficiary.email.value)
-    if (!(await exists).valueOf()) {
-      await this.userRepository.add({ 
-        name: beneficiary.name.value, 
-        email: beneficiary.email.value, 
-        plantype: beneficiary.plantype,
-        RG: beneficiary.RG,
-        CPF: beneficiary.CPF,
-        birthDate: beneficiary.birthDate,
-        dependent: beneficiary.dependent
-       })
+    const exists = this.userRepository.findUserByEmail(beneficiaryData.email)
+    if ((await exists).valueOf()) {
+      await this.userRepository.update(beneficiaryData)
     }
     return right(beneficiaryData)
   }

@@ -1,16 +1,15 @@
 import { HttpRequest, HttpResponse } from './ports/http'
 import { MissingParamError } from './errors/missing-param-error'
 import { badRequest, serverError, ok } from './helpers/http-helper'
-import { IRegisterBeneficiary } from '../../../usecases/register-beneficiary/iregister-beneficiary'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { RegisterBeneficiaryResponse } from '../../../usecases/register-beneficiary/register-beneficiary-response'
+import { UpdateBeneficiaryResponse } from '../../../usecases/update-beneficiary/update-beneficiary-response'
+import { IUpdateBeneficiary } from '../../../usecases/update-beneficiary/iupdate-beneficiary'
 import { iBeneficiaryController } from './iBeneficiaryController'
 
-export class RegisterBeneficiaryController implements iBeneficiaryController {
-  private readonly RegisterBeneficiary: IRegisterBeneficiary
+export class UpdateBeneficiaryController implements iBeneficiaryController {
+  private readonly UpdateBeneficiary: IUpdateBeneficiary
 
-  constructor (registerBeneficiary: IRegisterBeneficiary) {
-    this.RegisterBeneficiary = registerBeneficiary
+  constructor (UpdateBeneficiary: IUpdateBeneficiary) {
+    this.UpdateBeneficiary = UpdateBeneficiary
   }
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -20,6 +19,7 @@ export class RegisterBeneficiaryController implements iBeneficiaryController {
         return badRequest(new MissingParamError(field))
       }
       const beneficiaryData = {
+        id: httpRequest.body.id,
         name: httpRequest.body.name,
         email: httpRequest.body.email,
         plantype: httpRequest.body.plantype,
@@ -29,10 +29,9 @@ export class RegisterBeneficiaryController implements iBeneficiaryController {
         dependent: httpRequest.body.dependent
 
       }
-      const RegisterBeneficiaryResponse: RegisterBeneficiaryResponse =
-      await this.RegisterBeneficiary.RegisterBeneficiaryOnSystem(beneficiaryData)
-      if (RegisterBeneficiaryResponse.isLeft()) {
-        return badRequest(RegisterBeneficiaryResponse.value)
+      const updateBeneficiaryResponse: UpdateBeneficiaryResponse = await this.UpdateBeneficiary.UpdateBeneficiaryOnSystem(beneficiaryData)
+      if (updateBeneficiaryResponse.isLeft()) {
+        return badRequest(updateBeneficiaryResponse.value)
       }
       return ok(beneficiaryData)
     } catch (error) {

@@ -1,5 +1,6 @@
-import { BeneficiaryData } from './beneficiary-data'
 import { Email } from './email'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { BeneficiaryData } from './beneficiary-data'
 import { Name } from './name'
 import { InvalidEmailError } from './errors/invalid-email'
 import { Either, left, right } from '../../shared/either'
@@ -7,6 +8,7 @@ import { InvalidNameError } from './errors/invalid-name'
 import { PlanType } from './planType'
 
 export class Beneficiary {
+
   public readonly name: Name
   public readonly email: Email
   public readonly plantype: PlanType
@@ -16,7 +18,7 @@ export class Beneficiary {
   public readonly dependent: number
 
   private constructor (
-    name: Name, 
+    name: Name,
     email: Email,
     plantype: PlanType,
     RG: string,
@@ -27,16 +29,15 @@ export class Beneficiary {
     this.email = email
     this.plantype = plantype
     this.RG = RG
-    this.CPF = CPF,
+    this.CPF = CPF
     this.birthDate = birthDate
     this.dependent = dependent
-
     Object.freeze(this)
   }
 
   static create (BeneficiaryData: BeneficiaryData): Either<InvalidNameError | InvalidEmailError, Beneficiary> {
     const nameOrError: Either<InvalidNameError, Name> = Name.create(BeneficiaryData.name)
-    const emailOrError: Either<InvalidEmailError, Email> = Email.create(BeneficiaryData.email)    
+    const emailOrError: Either<InvalidEmailError, Email> = Email.create(BeneficiaryData.email)
     if (nameOrError.isLeft()) {
       return left(nameOrError.value)
     }
@@ -52,6 +53,16 @@ export class Beneficiary {
     const birthDate: Date = BeneficiaryData.birthDate
     const dependent: number = BeneficiaryData.dependent
 
-    return right(new Beneficiary(name, email, plantype, RG, CPF,birthDate, dependent))
+    return right(new Beneficiary(name, email, plantype, RG, CPF, birthDate, dependent))
+  }
+
+  static createEmail (BeneficiaryData: BeneficiaryData): Either<InvalidEmailError, Email> {
+    const emailOrError: Either<InvalidEmailError, Email> = Email.create(BeneficiaryData.email)
+    if (emailOrError.isLeft()) {
+      return left(emailOrError.value)
+    }
+    const email: Email = emailOrError.value
+
+    return right(email)
   }
 }
