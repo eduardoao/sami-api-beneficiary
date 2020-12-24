@@ -5,7 +5,7 @@ import { Name } from './name'
 import { InvalidEmailError } from './errors/invalid-email'
 import { Either, left, right } from '../../shared/either'
 import { InvalidNameError } from './errors/invalid-name'
-import { PlanType } from './planType'
+import { PlanType } from './plantype'
 
 export class Beneficiary {
   public readonly name: Name
