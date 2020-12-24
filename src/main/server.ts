@@ -2,7 +2,7 @@ import { MongoHelper } from '../external/repositories/mongodb/helpers/mongo-help
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config()
 
-const PORT = 5000
+const PORT = process.env.PORT
 MongoHelper.connect('mongodb+srv://sami:sami@cluster0.daskj.mongodb.net/sami?retryWrites=true&w=majority')
   .then(async () => {
     const app = (await import('./config/app')).default
