@@ -123,6 +123,128 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "https://api-sami.herokuapp.com/api/consult",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-sami.herokuapp.com/api/consult",
+					"protocol": "https",
+					"host": [
+						"api-sami",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"consult"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-sami.herokuapp.com/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"name\": \"eduardo\",\r\n    \"email\": \"valid_email@mail.com\",\r\n    \"plantype\": 1,\r\n    \"RG\": \"258552225\",\r\n    \"CPF\": \"25252521112\",\r\n    \"birthDate\": \"1978-04-23T18:25:43.511Z\",\r\n    \"dependent\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-sami.herokuapp.com/api/register",
+					"protocol": "https",
+					"host": [
+						"api-sami",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-sami.herokuapp.com/api/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n    \"email\": \"valid_email@mail.com\"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api-sami.herokuapp.com/api/update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"name\": \"eduardo oliveira\",\r\n    \"email\": \"valid_email@mail.com\",\r\n    \"plantype\": 3,\r\n    \"RG\": \"2585522257\",\r\n    \"CPF\": \"25252521112\",\r\n    \"birthDate\": \"1978-04-23T18:25:43.511Z\",\r\n    \"dependent\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-sami.herokuapp.com/api/update",
+					"protocol": "https",
+					"host": [
+						"api-sami",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"update"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
