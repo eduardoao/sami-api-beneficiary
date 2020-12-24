@@ -8,7 +8,6 @@ import { InvalidNameError } from './errors/invalid-name'
 import { PlanType } from './planType'
 
 export class Beneficiary {
-
   public readonly name: Name
   public readonly email: Email
   public readonly plantype: PlanType
@@ -24,7 +23,7 @@ export class Beneficiary {
     RG: string,
     CPF: string,
     birthDate: Date,
-    dependent: number) {
+    dependent?: number) {
     this.name = name
     this.email = email
     this.plantype = plantype
