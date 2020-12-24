@@ -1,9 +1,9 @@
 {
-  "name": "thewisedev-mailing",
+  "name": "api-sami",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node ./server.js",
+    "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
     "dev": "nodemon --inspect ./server.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
@@ -14,7 +14,7 @@
     "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
-  "author": "Otávio Lemos",
+  "author": "Eduardo Oliveira",
   "license": "ISC",
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.2.3",
